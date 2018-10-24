@@ -161,9 +161,8 @@ const Values = [
 
 const handleClick = item => console.log("onclick", item);
 
-const handleSelectItem = evt => {
-  evt.stopPropagation();
-  console.log("handleSelectItem", evt.target.value);
+const handleSelectItem = (on, item) => {
+  console.log("handleSelectItem", on, item);
 };
 
 function App() {

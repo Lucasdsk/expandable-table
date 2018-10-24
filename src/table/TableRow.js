@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Toggle } from "react-powerplug";
 import cx from "classnames";
 import styled from "styled-components";
 
@@ -58,16 +59,6 @@ const StyledHeader = styled.div`
     box-shadow: 0 4px #fff, 0 -4px #fff;
   }
 
-  .etb-checkbox {
-    width: 25px;
-    display: inline-block;
-    flex-shrink: 0;
-
-    input {
-      margin: 0;
-    }
-  }
-
   .etb-values {
     width: 100%;
     display: flex;
@@ -83,6 +74,32 @@ const StyledHeader = styled.div`
     }
   }
 
+`;
+
+const StyledCheckbox = styled.span`
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 7px;
+  border-radius: 50%;
+  border: 2px solid #66aedd;
+  cursor: pointer;
+  
+  ${p =>
+    p.on &&
+    `
+      &:before {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #66aedd;
+      }
+    `}
 `;
 
 const StyledValues = styled.div`
@@ -127,12 +144,20 @@ const TableRow = ({
   const isExpanded = expandedItems.includes(code);
   return (
     <StyledRow isExpanded={isExpanded} hasChildren={!!children}>
-      <div className="info">
+      <div className="etb-info">
         <StyledHeader>
           {!children && (
-            <span className="etb-checkbox">
-              <input type="checkbox" onChange={onSelectItem} />
-            </span>
+            <Toggle>
+              {({ on, toggle }) => (
+                <StyledCheckbox
+                  on={on}
+                  onClick={() => {
+                    toggle();
+                    onSelectItem(on, item);
+                  }}
+                />
+              )}
+            </Toggle>
           )}
           {children && (
             <button className="etb-btn" onClick={() => onExpandItem(code)}>
@@ -140,9 +165,7 @@ const TableRow = ({
             </button>
           )}
           <StyledValues onClick={!children ? () => onClick(item) : undefined}>
-            <StyledLabel childLevel={childLevel}>
-              {childLevel} - {label}
-            </StyledLabel>
+            <StyledLabel childLevel={childLevel}>{label}</StyledLabel>
             <div className="etb-values">
               {valuesKeys.map((key, index) => (
                 <div key={index} className="etb-column">
