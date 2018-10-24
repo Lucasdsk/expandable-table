@@ -8,29 +8,31 @@ const StyledTableLabel = styled.div`
   display: flex;
   box-sizing: border-box;
 
+  .etb-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 5px;
+    font-weight: bold;
+    color: #3b495e;
+    min-width: ${LABEL_WIDTH}px;
+    background-color: #c6e8ff;
+  }
+
   .etb-values {
     display: flex;
 
     .etb-column {
       color: #3b495e;
-      border-right:  1px solid #dbdbdb;
+      border-right:  1px solid #fff;
       border-bottom:  1px solid #dbdbdb;
+      background-color: #c6e8ff;
 
       &:first-child {
-        border-left:  1px solid #dbdbdb;
+        border-left:  1px solid #fff;
       }
     }
   }
-
-  .etb-label {
-    display: flex;
-    align-items: center;
-    text-align: left;
-    font-weight: bold;
-    color: #3b495e;
-    min-width: ${LABEL_WIDTH}px;
-  }
-
 `;
 
 const TableLabel = ({ label, labelsList }) => (

@@ -9,6 +9,11 @@ import TableRow from "./TableRow";
 import { COLUMN_WIDTH } from "./constants";
 
 const StyledTable = styled.div`
+
+  * {
+    box-sizing: border-box;
+  }
+
   .etb-row-group:first-child {
     .etb-row-labels {
       .etb-values {
