@@ -131,6 +131,34 @@ const MOCK = [
   }
 ];
 
+const Labels = [
+  "Util. Livre",
+  "Contr Qual",
+  "Bloq",
+  "Consig",
+  "Val",
+  "D. Passados",
+  "Dia Venc.",
+  "PE-HP",
+  "Ativo",
+  "Produção",
+  "Justificativa"
+];
+
+const Values = [
+  "UtilizacaoLivre",
+  "ControleQualidade",
+  "Bloqueado",
+  "Consignado",
+  "Validade",
+  "DiasPassados",
+  "DiasVencimento",
+  "ProjecaoEstoqueHorizonte",
+  "Ativo",
+  "Producao",
+  "Justificativa"
+];
+
 const handleClick = item => console.log("onclick", item);
 
 const handleSelectItem = evt => {
@@ -143,6 +171,8 @@ function App() {
     <div className="App">
       <MyTable
         data={MOCK}
+        labelsList={Labels}
+        valuesKeys={Values}
         onClickItem={handleClick}
         onSelectItem={handleSelectItem}
       />

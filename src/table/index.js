@@ -25,34 +25,6 @@ const StyledTable = styled.div`
   }
 `;
 
-const Labels = [
-  "Util. Livre",
-  "Contr Qual",
-  "Bloq",
-  "Consig",
-  "Val",
-  "D. Passados",
-  "Dia Venc.",
-  "PE-HP",
-  "Ativo",
-  "Produção",
-  "Justificativa"
-];
-
-const Values = [
-  "UtilizacaoLivre",
-  "ControleQualidade",
-  "Bloqueado",
-  "Consignado",
-  "Validade",
-  "DiasPassados",
-  "DiasVencimento",
-  "ProjecaoEstoqueHorizonte",
-  "Ativo",
-  "Producao",
-  "Justificativa"
-];
-
 const handleExpandItem = (items, setState) => code => {
   if (items.includes(code)) {
     setState(prevState => ({
@@ -67,6 +39,8 @@ const handleExpandItem = (items, setState) => code => {
 
 const Table = ({
   data,
+  labelsList,
+  valuesKeys,
   expandedItems,
   onClickItem,
   onSelectItem,
@@ -76,15 +50,15 @@ const Table = ({
     {({ state, setState }) => (
       <StyledTable>
         {data.map((familia, index) => (
-          <div className="etb-row-group">
-            <TableLabel label={familia.Label} labelsList={Labels} />
+          <div key={index} className="etb-row-group">
+            <TableLabel label={familia.Label} labelsList={labelsList} />
             {familia.children.map((item, index) => (
               <TableRow
                 key={index}
                 code={`${familia.Id}-${item.Id}`}
                 label={item.Label}
                 item={item}
-                values={Values}
+                valuesKeys={valuesKeys}
                 expandedItems={state.expandedItems}
                 children={item.children}
                 onClick={onClickItem}
@@ -101,6 +75,8 @@ const Table = ({
 
 Table.propTypes = {
   data: PropTypes.array.isRequired,
+  labelsList: PropTypes.array,
+  valuesKeys: PropTypes.array,
   expandedItems: PropTypes.array,
   onClickItem: PropTypes.func,
   onSelectItem: PropTypes.func,

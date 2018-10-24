@@ -108,7 +108,7 @@ const TableRow = ({
   code,
   label,
   item,
-  values,
+  valuesKeys,
   children,
   expandedItems = [],
   onClick,
@@ -134,7 +134,7 @@ const TableRow = ({
             {childLevel} - {label}
           </StyledLabel>
           <div className="etb-values">
-            {values.map((key, index) => (
+            {valuesKeys.map((key, index) => (
               <div key={index} className="etb-column">
                 {item[key] || "-"}
               </div>
@@ -152,7 +152,7 @@ const TableRow = ({
               code={`${code}-${item.Id}`}
               item={item}
               label={item.Label}
-              values={values}
+              valuesKeys={valuesKeys}
               children={item.children}
               expandedItems={expandedItems}
               onClick={onClick}
@@ -174,7 +174,7 @@ TableRow.propTypes = {
   code: PropTypes.string,
   label: PropTypes.string,
   item: PropTypes.object,
-  values: PropTypes.array,
+  valuesKeys: PropTypes.array,
   children: PropTypes.array,
   expandedItems: PropTypes.array,
   onClick: PropTypes.func,
