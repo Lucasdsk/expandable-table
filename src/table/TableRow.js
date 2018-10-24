@@ -44,15 +44,6 @@ const StyledHeader = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
-  ${p =>
-    p.onClick &&
-    `
-    cursor: pointer;
-
-    &:hover {
-      background-color: #f1f1f1;
-    }
-  `};
 
   .etb-btn {
     position: absolute;
@@ -91,10 +82,28 @@ const StyledHeader = styled.div`
       }
     }
   }
+
+`;
+
+const StyledValues = styled.div`
+  width: 100%;
+  display: flex;
+  ${p =>
+    p.onClick &&
+    `
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  `};
 `;
 
 const StyledLabel = styled.div`
-  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
   color: #3b495e;
   font-weight: bold;
   flex-shrink: 0;
@@ -119,7 +128,7 @@ const TableRow = ({
   return (
     <StyledRow isExpanded={isExpanded} hasChildren={!!children}>
       <div className="info">
-        <StyledHeader onClick={!children ? () => onClick(item) : undefined}>
+        <StyledHeader>
           {!children && (
             <span className="etb-checkbox">
               <input type="checkbox" onChange={onSelectItem} />
@@ -130,16 +139,18 @@ const TableRow = ({
               {isExpanded ? "-" : "+"}
             </button>
           )}
-          <StyledLabel childLevel={childLevel}>
-            {childLevel} - {label}
-          </StyledLabel>
-          <div className="etb-values">
-            {valuesKeys.map((key, index) => (
-              <div key={index} className="etb-column">
-                {item[key] || "-"}
-              </div>
-            ))}
-          </div>
+          <StyledValues onClick={!children ? () => onClick(item) : undefined}>
+            <StyledLabel childLevel={childLevel}>
+              {childLevel} - {label}
+            </StyledLabel>
+            <div className="etb-values">
+              {valuesKeys.map((key, index) => (
+                <div key={index} className="etb-column">
+                  {item[key] || "-"}
+                </div>
+              ))}
+            </div>
+          </StyledValues>
         </StyledHeader>
       </div>
       <div className={cx("etb-children", { expanded: isExpanded })}>
