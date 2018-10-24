@@ -21,6 +21,7 @@ const StyledTableLabel = styled.div`
 
   .etb-values {
     display: flex;
+    width: 100%;
 
     .etb-column {
       color: #3b495e;
