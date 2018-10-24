@@ -102,20 +102,6 @@ const StyledCheckbox = styled.span`
     `}
 `;
 
-const StyledValues = styled.div`
-  width: 100%;
-  display: flex;
-  ${p =>
-    p.onClick &&
-    `
-    cursor: pointer;
-
-    &:hover {
-      background-color: #f1f1f1;
-    }
-  `};
-`;
-
 const StyledLabel = styled.div`
   display: flex;
   align-items: center;
@@ -127,6 +113,23 @@ const StyledLabel = styled.div`
   padding-left: 5px;
   box-sizing: border-box;
   width: ${p => LABEL_WIDTH - p.childLevel * PADDING_LEFT}px;
+`;
+
+const StyledValues = styled.div`
+  width: 100%;
+  display: flex;
+  ${p =>
+    p.onClick &&
+    `
+      cursor: pointer;
+
+      &:hover {
+        .etb-column,
+        .etb-label {
+          background-color: #f1f1f1;
+        }
+      }
+    `};
 `;
 
 const TableRow = ({
@@ -165,7 +168,9 @@ const TableRow = ({
             </button>
           )}
           <StyledValues onClick={!children ? () => onClick(item) : undefined}>
-            <StyledLabel childLevel={childLevel}>{label}</StyledLabel>
+            <StyledLabel className="etb-label" childLevel={childLevel}>
+              {label}
+            </StyledLabel>
             <div className="etb-values">
               {valuesKeys.map((key, index) => (
                 <div key={index} className="etb-column">
