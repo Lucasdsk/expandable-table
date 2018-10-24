@@ -25,12 +25,16 @@ const StyledTableLabel = styled.div`
 
     .etb-column {
       color: #3b495e;
-      border-right:  1px solid #fff;
-      border-bottom:  1px solid #dbdbdb;
+      border-right: 1px solid #fff;
+      border-bottom: 1px solid #dbdbdb;
       background-color: #c6e8ff;
 
+      &:last-child {
+        border-right: 1px solid #dbdbdb;
+      }
+
       &:first-child {
-        border-left:  1px solid #fff;
+        border-left: 1px solid #fff;
       }
     }
   }
